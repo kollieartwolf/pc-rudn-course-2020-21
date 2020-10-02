@@ -1,0 +1,141 @@
+/* Привет! Это - файл стилей, ничего необычного. */
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('font-jetbrains-mono-regular.ttf');
+}
+
+@font-face {
+    font-family: 'Iosevka Etoile';
+    src: url('font-iosevka-etoile-regular.ttf');
+}
+
+body {
+    font-family: 'Iosevka Etoile';
+    color: #0079c2;
+    font-size: 16px;
+    background-color: #5600f5;
+    background-image: url("background-45-degree-fabric-light.png");
+    padding: 0;
+    margin: 0;
+}
+
+body > * {
+    background-color: #fff;
+}
+
+header {
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+nav, footer {
+    padding: 5px;
+    display: flex;
+    justify-content: space-around;
+}
+
+footer {
+    position: fixed;
+    left: 0; bottom: 0;
+    width: 100%;
+}
+
+aside {
+    padding: 10px;
+    height: auto;
+    width: 180px;
+    position: absolute !important;
+    z-index: 1;
+    overflow: auto;
+    font-weight: 500;
+    border-radius: 0 0 8px 0;
+}
+
+article {
+    margin: 10px 10px 10px 210px;
+    width: auto;
+    padding: 15px;
+    transition: margin-left 0s;
+    border-radius: 8px;
+}
+
+p {
+    text-indent: 20px;
+}
+
+.first {
+    margin-top: 0px;
+}
+
+.last {
+    margin-bottom: 0px;
+}
+
+.aside-header {
+    font-size: 18px;
+}
+
+.text-centered {
+    text-indent: 0px;
+    text-align: center;
+}
+
+code {
+    font-family: 'JetBrains Mono';
+    color: /* #5774ff; */ #8b0bd9;
+}
+
+.code-block {
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    border-left: 5px solid #8b0bd9;
+    white-space: pre-wrap;
+}
+
+.comment-block {
+    color: #cfb30a;
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    border-left: 5px solid #cfb30a;
+    white-space: pre-wrap;
+}
+
+.attention-block {
+    color: #d12a04;
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    border-left: 5px solid #d12a04;
+    white-space: pre-wrap;
+}
+
+.article-image-holder {
+    text-align: center;
+}
+
+.medium-image {
+    max-width: 100%;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    nav {
+        font-size: 1rem;
+    }
+
+    aside {
+        height: unset;
+        width: unset;
+        position: unset !important;
+        border-radius: 0;
+    }
+
+    article {
+        margin: 10px;
+        width: auto;
+    }
+}
