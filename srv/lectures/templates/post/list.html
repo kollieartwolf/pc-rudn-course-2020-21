@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Лекции{% endblock %}
+{% block h1_header %}lectures{% endblock %}
+{% block aside %}
+    <aside>
+        <p class="aside-header">Содержимое</p>
+        <ol>
+        {% for post in posts %}
+            <li><a href="#{{ post.slug }}">{{ post.title }}</a></li>
+        {% endfor %}
+        </ol>
+    </aside>
+{% endblock %}
+{% block content %}
+    <article><ol>
+    {% for post in posts %}
+        <section>
+            <h2 class="first last" id="{{ post.slug }}"><li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li></h2>
+            <p>{{ post.short_desc }}</p>
+        </section>
+    {% endfor %}
+    </ol></article>
+{% endblock %}
