@@ -1,6 +1,12 @@
 {% extends "base.html" %}
+{{ post.body|safe }}
 {% block title %}{{ post.title }}{% endblock %}
 {% block h1_header %}{{ post.slug }}{% endblock %}
 {% block content %}
-{{ post.body|linebreaks }}
+    <article>
+        {% autoescape off %}
+        {{ post.body }}
+        {% endautoescape %}
+    </article>
+<!-- {{ post.body|linebreaks }} -->
 {% endblock %}
