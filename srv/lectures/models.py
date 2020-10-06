@@ -3,33 +3,74 @@ from django.utils import timezone
 from django.urls import reverse
 
 
-class OpenedManager(models.Manager):
+class OpenedLectures(models.Manager):
     def get_queryset(self):
-        return super(OpenedManager,
-                     self).get_queryset().filter(status='opened')
+        return super(OpenedLectures, self).get_queryset().filter(status='opened')
 
 
-class Post(models.Model):
-    STATUS_CHOICES = (('unshown', 'Unshown'),
-                      ('opened', 'Opened'),
+class Lecture(models.Model):
+    # статусы лекций:
+    STATUS_CHOICES = (('writing', 'В процессе'),
+                      ('to_review', 'Требует проверки'),
+                      # лекция может быть недоступна, так как студент ещё не прошёл предыдущие
+                      ('blocked', 'Заблокирована'),
+                      ('opened', 'Открыта'),
                       )
-    title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250)
-    short_desc = models.TextField(max_length=250)
-    body = models.TextField()
-    publish = models.DateTimeField(default=timezone.now)
-    status = models.CharField(max_length=10,
+    title = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=120)
+    desc = models.TextField(max_length=250)
+    status = models.CharField(max_length=9,
                               choices=STATUS_CHOICES,
-                              default='unshown')
+                              default='writing')
+    publish = models.DateTimeField(default=timezone.now)
     objects = models.Manager()
-    opened = OpenedManager()
-
+    opened = OpenedLectures()
+    
     def get_absolute_url(self):
-        return reverse('lectures:post_detail',
-                       args=[self.slug])
-
+        return reverse('lectures:show_lecture', args=[self.slug])
+    
     class Meta:
         ordering = ('publish',)
+        db_table = 'lectures'
 
-        def __str__(self):
-            return self.title
+    def __str__(self):
+        return self.title
+
+
+class Article(models.Model):
+    STATUS_CHOICES = (('writing', 'В процессе'),
+                      ('to_review', 'Требует проверки'),
+                      ('ready', 'Готова'),
+                      )
+    title = models.CharField(max_length=100)
+    status = models.CharField(max_length=9,
+                              choices=STATUS_CHOICES,
+                              default='writing')
+    publish = models.DateTimeField(default=timezone.now)
+    lecture = models.ForeignKey(Lecture,
+                                on_delete=models.CASCADE,
+                                related_name='articles')
+    
+    class Meta:
+        ordering = ('publish',)
+        db_table = 'articles'
+        
+    def __str__(self):
+        return self.title
+
+
+class Section(models.Model):
+    h2_title = models.CharField(max_length=100)
+    h2_slug = models.SlugField(max_length=120)
+    body = models.TextField()
+    publish = models.DateTimeField(default=timezone.now)
+    article = models.ForeignKey(Article,
+                                on_delete=models.CASCADE,
+                                related_name='sections')
+    
+    class Meta:
+        ordering = ('publish',)
+        db_table = 'sections'
+    
+    def __str__(self):
+        return self.h2_title

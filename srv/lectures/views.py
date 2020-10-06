@@ -1,17 +1,12 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post
+from .models import Lecture
 
 
-def post_list(request):
-    posts = Post.opened.all()
-    return render(request,
-                  'post/list.html',
-                  {'posts': posts})
+def show_list(request):
+    lectures = Lecture.opened.all()
+    return render(request, 'lectures/list.html', {'lecs': lectures})
 
 
-def post_detail(request, post):
-    post = get_object_or_404(Post, slug=post,
-                             status='opened')
-    return render(request,
-                  'post/lecture.html',
-                  {'post': post})
+def show_lecture(request, lec_slug):
+    lecture = get_object_or_404(Lecture, slug=lec_slug, status='opened')
+    return render(request, 'lectures/lecture.html', {'lec': lecture})

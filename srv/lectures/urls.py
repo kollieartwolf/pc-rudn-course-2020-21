@@ -4,9 +4,8 @@ from . import views
 app_name = 'lectures'
 
 urlpatterns = [
-    # post views
-    path('', views.post_list, name='post_list'), 
-    path('<slug:post>/',
-         views.post_detail, 
-         name='post_detail'), 
+    path('', views.show_list, name='show_list'), 
+    path('<slug:lec_slug>/',
+         views.show_lecture, 
+         name='show_lecture'), 
     ]

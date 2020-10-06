@@ -5,18 +5,18 @@
     <aside>
         <p class="aside-header">Содержимое</p>
         <ol>
-        {% for post in posts %}
-            <li><a href="#{{ post.slug }}">{{ post.title }}</a></li>
+        {% for lec in lecs %}
+            <li><a href="#{{ lec.slug }}">{{ lec.title }}</a></li>
         {% endfor %}
         </ol>
     </aside>
 {% endblock %}
 {% block content %}
     <article><ol>
-    {% for post in posts %}
+    {% for lec in lecs %}
         <section>
-            <h2 class="first last" id="{{ post.slug }}"><li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li></h2>
-            <p>{{ post.short_desc }}</p>
+            <h2 class="first last" id="{{ lec.slug }}"><li><a href="{{ lec.get_absolute_url }}">{{ lec.title }}</a></li></h2>
+            <p>{{ lec.desc }}</p>
         </section>
     {% endfor %}
     </ol></article>
