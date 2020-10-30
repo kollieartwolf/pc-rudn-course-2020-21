@@ -104,6 +104,7 @@ code {
 
 .code-block {
     text-indent: 0em;
+    color: /* #5774ff; */ #8b0bd9;
     display: block;
     margin: 10px;
     padding: 10px;
