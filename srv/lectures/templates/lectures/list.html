@@ -6,7 +6,9 @@
         <p class="aside-header">Содержимое</p>
         <ol>
         {% for lec in lecs %}
-            <li><a href="#{{ lec.slug }}">{{ lec.title }}</a></li>
+            {% if lec.status == "opened" %}
+                <li><a href="#{{ lec.slug }}">{{ lec.title }}</a></li>
+            {% endif %}
         {% endfor %}
         </ol>
     </aside>
@@ -14,10 +16,12 @@
 {% block content %}
     <article><ol>
     {% for lec in lecs %}
-        <section>
-            <h2 class="first last" id="{{ lec.slug }}"><li><a href="{{ lec.get_absolute_url }}">{{ lec.title }}</a></li></h2>
-            <p>{{ lec.desc }}</p>
-        </section>
+        {% if lec.status == "opened" %}
+            <section>
+                <h2 class="first last" id="{{ lec.slug }}"><li><a href="{{ lec.get_absolute_url }}">{{ lec.title }}</a></li></h2>
+                <p>{{ lec.desc }}</p>
+            </section>
+        {% endif %}
     {% endfor %}
     </ol></article>
 {% endblock %}

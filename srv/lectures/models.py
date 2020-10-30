@@ -12,8 +12,6 @@ class Lecture(models.Model):
     # статусы лекций:
     STATUS_CHOICES = (('writing', 'В процессе'),
                       ('to_review', 'Требует проверки'),
-                      # лекция может быть недоступна, так как студент ещё не прошёл предыдущие
-                      ('blocked', 'Заблокирована'),
                       ('opened', 'Открыта'),
                       )
     title = models.CharField(max_length=100)

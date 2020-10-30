@@ -45,7 +45,7 @@ footer {
 aside {
     padding: 10px;
     height: auto;
-    width: 180px;
+    width: 190px;
     position: absolute !important;
     z-index: 1;
     overflow: auto;
@@ -63,8 +63,13 @@ aside a:hover {
     color: #28536e;
 }
 
+aside p {
+    text-align: center;
+    text-indent: 0px;
+}
+
 article {
-    margin: 10px 10px 10px 210px;
+    margin: 10px 10px 10px 220px;
     width: auto;
     padding: 15px;
     transition: margin-left 0s;
