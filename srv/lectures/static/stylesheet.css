@@ -103,6 +103,7 @@ code {
 }
 
 .code-block {
+    text-indent: 0em;
     display: block;
     margin: 10px;
     padding: 10px;
