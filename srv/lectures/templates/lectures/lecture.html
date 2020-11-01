@@ -1,34 +1,11 @@
 {% extends "base.html" %}
-{% block title %}{{ lec.title }}{% endblock %}
-{% block h1_header %}{{ lec.slug }}{% endblock %}
-{% block aside %}
-<aside>
-    <p class="aside-header">Содержимое</p>
-    {% for article in lec.articles.all %}
-        {% if article.status == "ready" %}
-            <p>{{ article.title }}</p>
-            <ol>
-                {% for section in article.sections.all %}
-                <li><a href="#{{ section.h2_slug }}">{{ section.h2_title }}</a></li>
-                {% endfor %}
-            </ol>
-        {% endif %}
-    {% endfor %}
+{% block title %}{{ lec.title }}{% endblock %}{% block h1_header %}{{ lec.slug }}{% endblock %}{% block aside %}<aside>
+<p class="aside-header">Содержимое</p>
+{% for article in lec.articles.all %}{% if article.status == "ready" %}<p>{{ article.title }}</p>
+<ol>{% for section in article.sections.all %}<li><a href="#{{ section.h2_slug }}">{{ section.h2_title }}</a></li>{% endfor %}</ol>{% endif %}{% endfor %}
 </aside>
-{% endblock %}
-{% block content %}
-{% for article in lec.articles.all %}
-    {% if article.status == "ready" %}
-        <article>
-        {% for section in article.sections.all %}
-            <section>
-                <h2 id="{{ section.h2_slug }}" {% if forloop.counter == 1 %} class="first" {% endif %}>{{ section.h2_title }}</h2>
-                {% autoescape off %}
-                {{ section.body|safe }}
-                {% endautoescape %}
-            </section>
-        {% endfor %}
-        </article>
-    {% endif %}
-{% endfor %}
-{% endblock %}
+{% endblock %}{% block content %}{% for article in lec.articles.all %}{% if article.status == "ready" %}<article>
+{% for section in article.sections.all %}<section>
+<h2 id="{{ section.h2_slug }}" {% if forloop.counter == 1 %} class="first" {% endif %}>{{ section.h2_title }}</h2>
+{% autoescape off %}{{ section.body|safe }}{% endautoescape %}
+</section>{% endfor %}</article>{% endif %}{% endfor %}{% endblock %}
